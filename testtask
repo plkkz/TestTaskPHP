@@ -1,0 +1,37 @@
+<?php
+class Logs{
+    
+    $array = array[];//массив
+
+    function logFile($textLog) {
+        try 
+        {
+            $file = '(место для вашего пути) \logFile.txt'; //указать путь
+        }
+        catch {
+            define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/logFile.txt"); // константа LOG_FILENAME, в которой задается путь к лог-файлу
+        }
+        self::add();
+        
+    }
+    function add(){
+        $text = '\n';
+        $text .= print_r($textLog);  //Выводим переданную переменную
+        $text .= '\n'. date('Y-m-d H:i:s') .'\n';  //актуальная дата после текста 
+        $fOpen = fopen($file,'a');  //открытие и запись в конец файла
+        fwrite($fOpen, $text);  //запись в файл
+        private $log = $text;  //приватная переменная для массива
+        $array[] = $log;  //запись лога в массив
+        fclose($fOpen);  //закрытие файла
+        
+    }
+    // возвращение массива
+    function get(){
+        return $this -> array;
+    }
+    //вывод лога в деструкторе
+    function __destruct(){
+            echo $log;
+    }
+}
+?>
